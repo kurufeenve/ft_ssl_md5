@@ -6,7 +6,7 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 15:35:00 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/02/09 16:50:23 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/02/15 18:20:55 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 int		main(int argc, char **argv)
 {
-	char	buf;
+	char	buf[512];
 	char	usage[] = "usage: ft_ssl command [command opts] [command args]\n";
 	char	*cli_data;
 	char	*cli_buf;
@@ -34,11 +34,12 @@ int		main(int argc, char **argv)
 		i++;
 	}
 
-	while(read(1, &buf, 1))
+	while(read(0, buf, 512))
 	{
 		//cli_data = ft_strjoin(cli_data, &buf);
+		ft_putchar(buf);
 	}
-	ft_putstr(cli_data);
+	//ft_putstr(cli_data);
 	system("leaks ft_ssl");
 	return (0);
 }

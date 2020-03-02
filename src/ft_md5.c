@@ -1,34 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_memcpy.c                                        :+:      :+:    :+:   */
+/*   ft_md5.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/11/05 16:09:06 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/02 17:09:30 by vordynsk         ###   ########.fr       */
+/*   Created: 2020/02/15 16:24:07 by vordynsk          #+#    #+#             */
+/*   Updated: 2020/03/02 16:21:50 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/libft.h"
+#include "../includes/ft_md5.h"
 
-void	*ft_memcpy(void *dest, void const *src, size_t n)
+void	ft_md5(void *hash)
 {
-	size_t		i;
-	char		*buf_dest;
-	char const	*buf_src;
+	char	result[] = {0xa1, 0xd0, 0xc6, 0xe8, 0x3f, 0x02, 0x73, 0x27, 0xd8, 0x46, 0x10, 0x63, 0xf4, 0xac, 0x58, 0xa6};
 
-	if (dest == NULL || src == NULL)
-	{
-		return (NULL);
-	}
-	i = 0;
-	buf_dest = dest;
-	buf_src = src;
-	while (i < n)
-	{
-		buf_dest[i] = buf_src[i];
-		i++;
-	}
-	return (dest);
+	ft_memcpy(hash, (void *)result, 16);
 }

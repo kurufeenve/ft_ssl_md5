@@ -6,12 +6,14 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 15:58:22 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/02/09 16:35:58 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/02 16:16:03 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef CLI_H
-#define CLI_H
+#ifndef FT_SSL_H
+#define FT_SSL_H
+
+#include "cli.h"
 
 #include "../libft/includes/libft.h"
 

@@ -6,12 +6,11 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 15:35:00 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/02/15 18:20:55 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/02 15:22:27 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdlib.h>
-#include "includes/ft_ssl.h"
+#include "../includes/ft_ssl.h"
 
 int		main(int argc, char **argv)
 {
@@ -33,13 +32,7 @@ int		main(int argc, char **argv)
 		ft_putchar('\n');
 		i++;
 	}
-
-	while(read(0, buf, 512))
-	{
-		//cli_data = ft_strjoin(cli_data, &buf);
-		ft_putchar(buf);
-	}
-	//ft_putstr(cli_data);
+	cli();
 	system("leaks ft_ssl");
 	return (0);
 }

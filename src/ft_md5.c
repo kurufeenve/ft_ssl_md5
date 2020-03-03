@@ -6,13 +6,13 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 16:24:07 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/02 16:21:50 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/03 13:45:39 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_md5.h"
 
-void	ft_md5(void *hash)
+void	ft_md5_init(void *hash, void *data, t_md5 *md5_data)
 {
 	char	result[] = {0xa1, 0xd0, 0xc6, 0xe8, 0x3f, 0x02, 0x73, 0x27, 0xd8, 0x46, 0x10, 0x63, 0xf4, 0xac, 0x58, 0xa6};
 

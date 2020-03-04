@@ -6,15 +6,42 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 16:24:07 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/03 13:45:39 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/04 18:09:45 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_md5.h"
 
-void	ft_md5_init(void *hash, void *data, t_md5 *md5_data)
+unsigned char *ft_MD5(const unsigned char *d, unsigned long n,
+		unsigned char *md)
 {
-	char	result[] = {0xa1, 0xd0, 0xc6, 0xe8, 0x3f, 0x02, 0x73, 0x27, 0xd8, 0x46, 0x10, 0x63, 0xf4, 0xac, 0x58, 0xa6};
+	t_MD5_CTX				c;
+	static unsigned char	m[FT_MD5_DIGEST_LENGTH];
 
-	ft_memcpy(hash, (void *)result, 16);
+	if (md == NULL)
+	{
+		md = m;
+	}
+	ft_MD5_Update(&c, d, n);
+	/*
+	 * while(still have some data)
+	 * md5_update()
+	 */
+	ft_MD5_Final(md, &c);
+	ft_memset(&c, 0, sizeof(c));
+}
+
+int				ft_MD5_Init(MD5_CTX *c)
+{
+	ft_memset(c, 0, sizeof(*c));
+	c->a = A;
+	c->b = B;
+	c->c = C;
+	c->d = D;
+	return (1);
+}
+
+int				ft_MD5_Update(MD5_CTX *c, const void *data, unsigned long len)
+{
+
 }

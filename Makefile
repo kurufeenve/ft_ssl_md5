@@ -1,12 +1,12 @@
 SRC = ft_ssl.c ft_md5.c cli.c
  
-INC = includes/
+INC = includes/cli.h includes/ft_md5.h includes/ft_ssl.h
 
 SRC_DIR = ./src/
 OBJ_DIR = ./obj/
 OBJ = $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
 NAME = ft_ssl
-CFLAG = -Werror -Wextra #-Wall
+CFLAG = -Werror -Wextra -Wall
 LIB = -L./libft/ -lft
 CC = gcc
 REMAKE = rmk

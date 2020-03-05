@@ -6,7 +6,7 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 16:05:01 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/04 17:57:11 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/05 18:32:06 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,10 @@
  * maybe endian is wrong?
 */
 
-#define А (unsigned int)0x01234567
-#define В (unsigned int)0x89ABCDEF
-#define С (unsigned int)0xFEDCBA98
-#define D (unsigned int)0x76543210
+#define A 0x67452301
+#define B 0xEFCDAB89
+#define C 0x98BADCFE
+#define D 0x10325476
 
 #define FT_MD5_DIGEST_LENGTH 16
 
@@ -36,8 +36,8 @@ typedef struct	s_MD5_CTX
 
 unsigned char	*ft_MD5(const unsigned char *d, unsigned long n,
 		unsigned char *md);
-int				ft_MD5_Init(MD5_CTX *c);
-int				ft_MD5_Update(MD5_CTX *c, const void *data, unsigned long len);
-int				ft_MD5_Final(unsigned char *md, MD5_CTX *c);
+int				ft_MD5_Init(t_MD5_CTX *c);
+int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len);
+int				ft_MD5_Final(unsigned char *md, t_MD5_CTX *c);
 
 #endif

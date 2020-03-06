@@ -6,7 +6,7 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 16:05:01 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/05 18:32:06 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/06 17:12:45 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,8 @@
 #define D 0x10325476
 
 #define FT_MD5_DIGEST_LENGTH 16
+#define BLOCK_SIZE 64
+#define LEN_SIZE 8
 
 typedef struct	s_MD5_CTX
 {

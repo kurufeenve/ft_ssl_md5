@@ -40,17 +40,21 @@ badd +3 Makefile
 badd +3 compile.sh
 badd +1 src/ft_ssl.c
 badd +42 src/cli.c
-badd +33 src/ft_md5.c
+badd +54 src/ft_md5.c
 badd +35 includes/ft_md5.h
 badd +17 includes/ft_ssl.h
 badd +22 includes/cli.h
 badd +1 libft/ft_memjoin.c
 badd +13 libft/ft_atoi.c
-badd +122 libft/includes/libft.h
+badd +126 libft/includes/libft.h
 badd +30 libft/Makefile
 badd +10 libft/ft_memcpy.c
 badd +2 .gitignore
-badd +0 libft/ft_itoa_base.c
+badd +18 libft/ft_itoa_base.c
+badd +28 libft/ft_print_bytes.c
+badd +31 ~/.vimrc
+badd +27 libft/ft_bzero.c
+badd +22 libft/ft_memset.c
 argglobal
 silent! argdel *
 $argadd Makefile
@@ -69,7 +73,7 @@ exe 'vert 1resize ' . ((&columns * 31 + 227) / 455)
 exe 'vert 2resize ' . ((&columns * 423 + 227) / 455)
 argglobal
 enew
-file NERD_tree_1
+file NERD_tree_6
 let s:cpo_save=&cpo
 set cpo&vim
 nnoremap <buffer> <silent> <NL> :call nerdtree#ui_glue#invokeKeyMap("<C-j>")
@@ -370,8 +374,8 @@ nnoremap <buffer> <silent>  :call nerdtree#ui_glue#invokeKeyMap("<CR>")
 nnoremap <buffer> <silent> ? :call nerdtree#ui_glue#invokeKeyMap("?")
 nnoremap <buffer> <silent> A :call nerdtree#ui_glue#invokeKeyMap("A")
 nnoremap <buffer> <silent> B :call nerdtree#ui_glue#invokeKeyMap("B")
-nnoremap <buffer> <silent> C :call nerdtree#ui_glue#invokeKeyMap("C")
 nnoremap <buffer> <silent> CD :call nerdtree#ui_glue#invokeKeyMap("CD")
+nnoremap <buffer> <silent> C :call nerdtree#ui_glue#invokeKeyMap("C")
 nnoremap <buffer> <silent> D :call nerdtree#ui_glue#invokeKeyMap("D")
 nnoremap <buffer> <silent> F :call nerdtree#ui_glue#invokeKeyMap("F")
 nnoremap <buffer> <silent> I :call nerdtree#ui_glue#invokeKeyMap("I")
@@ -386,9 +390,9 @@ nnoremap <buffer> <silent> X :call nerdtree#ui_glue#invokeKeyMap("X")
 nnoremap <buffer> <silent> cd :call nerdtree#ui_glue#invokeKeyMap("cd")
 nnoremap <buffer> <silent> e :call nerdtree#ui_glue#invokeKeyMap("e")
 nnoremap <buffer> <silent> f :call nerdtree#ui_glue#invokeKeyMap("f")
-nnoremap <buffer> <silent> go :call nerdtree#ui_glue#invokeKeyMap("go")
-nnoremap <buffer> <silent> gs :call nerdtree#ui_glue#invokeKeyMap("gs")
 nnoremap <buffer> <silent> gi :call nerdtree#ui_glue#invokeKeyMap("gi")
+nnoremap <buffer> <silent> gs :call nerdtree#ui_glue#invokeKeyMap("gs")
+nnoremap <buffer> <silent> go :call nerdtree#ui_glue#invokeKeyMap("go")
 nnoremap <buffer> <silent> i :call nerdtree#ui_glue#invokeKeyMap("i")
 nnoremap <buffer> <silent> m :call nerdtree#ui_glue#invokeKeyMap("m")
 nnoremap <buffer> <silent> o :call nerdtree#ui_glue#invokeKeyMap("o")
@@ -399,9 +403,9 @@ nnoremap <buffer> <silent> s :call nerdtree#ui_glue#invokeKeyMap("s")
 nnoremap <buffer> <silent> t :call nerdtree#ui_glue#invokeKeyMap("t")
 nnoremap <buffer> <silent> u :call nerdtree#ui_glue#invokeKeyMap("u")
 nnoremap <buffer> <silent> x :call nerdtree#ui_glue#invokeKeyMap("x")
-nnoremap <buffer> <silent> <MiddleMouse> :call nerdtree#ui_glue#invokeKeyMap("<MiddleMouse>")
-nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#ui_glue#invokeKeyMap("<2-LeftMouse>")
 nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call nerdtree#ui_glue#invokeKeyMap("<LeftRelease>")
+nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#ui_glue#invokeKeyMap("<2-LeftMouse>")
+nnoremap <buffer> <silent> <MiddleMouse> :call nerdtree#ui_glue#invokeKeyMap("<MiddleMouse>")
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal noautoindent
@@ -619,11 +623,11 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 15 - ((14 * winheight(0) + 25) / 51)
+let s:l = 26 - ((25 * winheight(0) + 25) / 51)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-15
+26
 normal! 0
 wincmd w
 argglobal
@@ -735,7 +739,7 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 17 - ((8 * winheight(0) + 25) / 50)
+let s:l = 17 - ((16 * winheight(0) + 25) / 50)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
@@ -851,14 +855,13 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 35 - ((34 * winheight(0) + 51) / 102)
+let s:l = 17 - ((16 * winheight(0) + 51) / 102)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-35
+17
 normal! 0
 wincmd w
-4wincmd w
 exe 'vert 1resize ' . ((&columns * 31 + 227) / 455)
 exe '2resize ' . ((&lines * 51 + 52) / 105)
 exe 'vert 2resize ' . ((&columns * 195 + 227) / 455)
@@ -883,7 +886,7 @@ exe 'vert 2resize ' . ((&columns * 195 + 227) / 455)
 exe 'vert 3resize ' . ((&columns * 227 + 227) / 455)
 argglobal
 enew
-file NERD_tree_3
+file NERD_tree_2
 let s:cpo_save=&cpo
 set cpo&vim
 nnoremap <buffer> <silent> <NL> :call nerdtree#ui_glue#invokeKeyMap("<C-j>")
@@ -1401,11 +1404,11 @@ set nosplitright
 wincmd t
 set winminheight=1 winheight=1 winminwidth=1 winwidth=1
 exe 'vert 1resize ' . ((&columns * 31 + 227) / 455)
-exe 'vert 2resize ' . ((&columns * 211 + 227) / 455)
-exe 'vert 3resize ' . ((&columns * 211 + 227) / 455)
+exe 'vert 2resize ' . ((&columns * 195 + 227) / 455)
+exe 'vert 3resize ' . ((&columns * 227 + 227) / 455)
 argglobal
 enew
-file NERD_tree_4
+file NERD_tree_3
 let s:cpo_save=&cpo
 set cpo&vim
 nnoremap <buffer> <silent> <NL> :call nerdtree#ui_glue#invokeKeyMap("<C-j>")
@@ -1414,8 +1417,8 @@ nnoremap <buffer> <silent>  :call nerdtree#ui_glue#invokeKeyMap("<CR>")
 nnoremap <buffer> <silent> ? :call nerdtree#ui_glue#invokeKeyMap("?")
 nnoremap <buffer> <silent> A :call nerdtree#ui_glue#invokeKeyMap("A")
 nnoremap <buffer> <silent> B :call nerdtree#ui_glue#invokeKeyMap("B")
-nnoremap <buffer> <silent> C :call nerdtree#ui_glue#invokeKeyMap("C")
 nnoremap <buffer> <silent> CD :call nerdtree#ui_glue#invokeKeyMap("CD")
+nnoremap <buffer> <silent> C :call nerdtree#ui_glue#invokeKeyMap("C")
 nnoremap <buffer> <silent> D :call nerdtree#ui_glue#invokeKeyMap("D")
 nnoremap <buffer> <silent> F :call nerdtree#ui_glue#invokeKeyMap("F")
 nnoremap <buffer> <silent> I :call nerdtree#ui_glue#invokeKeyMap("I")
@@ -1430,9 +1433,9 @@ nnoremap <buffer> <silent> X :call nerdtree#ui_glue#invokeKeyMap("X")
 nnoremap <buffer> <silent> cd :call nerdtree#ui_glue#invokeKeyMap("cd")
 nnoremap <buffer> <silent> e :call nerdtree#ui_glue#invokeKeyMap("e")
 nnoremap <buffer> <silent> f :call nerdtree#ui_glue#invokeKeyMap("f")
-nnoremap <buffer> <silent> go :call nerdtree#ui_glue#invokeKeyMap("go")
-nnoremap <buffer> <silent> gs :call nerdtree#ui_glue#invokeKeyMap("gs")
 nnoremap <buffer> <silent> gi :call nerdtree#ui_glue#invokeKeyMap("gi")
+nnoremap <buffer> <silent> gs :call nerdtree#ui_glue#invokeKeyMap("gs")
+nnoremap <buffer> <silent> go :call nerdtree#ui_glue#invokeKeyMap("go")
 nnoremap <buffer> <silent> i :call nerdtree#ui_glue#invokeKeyMap("i")
 nnoremap <buffer> <silent> m :call nerdtree#ui_glue#invokeKeyMap("m")
 nnoremap <buffer> <silent> o :call nerdtree#ui_glue#invokeKeyMap("o")
@@ -1443,9 +1446,9 @@ nnoremap <buffer> <silent> s :call nerdtree#ui_glue#invokeKeyMap("s")
 nnoremap <buffer> <silent> t :call nerdtree#ui_glue#invokeKeyMap("t")
 nnoremap <buffer> <silent> u :call nerdtree#ui_glue#invokeKeyMap("u")
 nnoremap <buffer> <silent> x :call nerdtree#ui_glue#invokeKeyMap("x")
-nnoremap <buffer> <silent> <MiddleMouse> :call nerdtree#ui_glue#invokeKeyMap("<MiddleMouse>")
-nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#ui_glue#invokeKeyMap("<2-LeftMouse>")
 nnoremap <buffer> <silent> <LeftRelease> <LeftRelease>:call nerdtree#ui_glue#invokeKeyMap("<LeftRelease>")
+nnoremap <buffer> <silent> <2-LeftMouse> :call nerdtree#ui_glue#invokeKeyMap("<2-LeftMouse>")
+nnoremap <buffer> <silent> <MiddleMouse> :call nerdtree#ui_glue#invokeKeyMap("<MiddleMouse>")
 let &cpo=s:cpo_save
 unlet s:cpo_save
 setlocal noautoindent
@@ -1663,12 +1666,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 54 - ((53 * winheight(0) + 51) / 102)
+let s:l = 49 - ((48 * winheight(0) + 51) / 102)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-54
-normal! 03|
+49
+normal! 016|
 wincmd w
 argglobal
 edit includes/ft_md5.h
@@ -1786,10 +1789,11 @@ normal! zt
 42
 normal! 075|
 wincmd w
+2wincmd w
 exe 'vert 1resize ' . ((&columns * 31 + 227) / 455)
-exe 'vert 2resize ' . ((&columns * 211 + 227) / 455)
-exe 'vert 3resize ' . ((&columns * 211 + 227) / 455)
-tabnext 2
+exe 'vert 2resize ' . ((&columns * 195 + 227) / 455)
+exe 'vert 3resize ' . ((&columns * 227 + 227) / 455)
+tabnext 5
 set stal=1
 if exists('s:wipebuf')
   silent exe 'bwipe ' . s:wipebuf

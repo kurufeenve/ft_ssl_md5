@@ -6,7 +6,7 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/10/30 13:26:37 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/02 17:07:35 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/07 13:59:46 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,5 +123,6 @@ char				*ft_strnsub(char const *s, size_t start, size_t end);
 int					ft_atoi_base(char const *str, int base);
 void				ft_memjoin(void **dst, void *src, size_t dst_len,
 		size_t src_len);
+void				ft_print_bytes(unsigned char *bytes, size_t len);
 
 #endif

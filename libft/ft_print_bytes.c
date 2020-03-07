@@ -6,13 +6,13 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/06 20:03:55 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/06 20:04:53 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/07 15:47:24 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/libft.h"
 
-void	print_bytes(unsigned char *bytes, size_t len)
+void	ft_print_bytes(unsigned char *bytes, size_t len)
 {
 	size_t	i;
 	char	*buf;

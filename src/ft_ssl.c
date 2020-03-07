@@ -6,7 +6,7 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/09 15:35:00 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/06 20:05:04 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/07 13:59:30 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ int		main(int argc, char **argv)
 	ft_MD5(data, 2, hash);
 	printf("data = %s\n", data);
 	ft_putstr("hash = ");
-	print_bytes(hash, 16);
+	ft_print_bytes(hash, 16);
 	system("leaks ft_ssl");
 	return (0);
 }

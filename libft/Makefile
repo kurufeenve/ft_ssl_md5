@@ -6,7 +6,7 @@
 #    By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/10/30 13:27:38 by vordynsk          #+#    #+#              #
-#    Updated: 2020/03/02 16:54:41 by vordynsk         ###   ########.fr        #
+#    Updated: 2020/03/07 13:35:44 by vordynsk         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ OFILES = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.
 		ft_printarr.o ft_realloc.o get_next_line.o ft_memkill.o ft_lstaddend.o ft_isnumber.o \
 		ft_chararrdel.o ft_itoa_base.o ft_qpow.o ft_vector_length.o ft_vec_add.o ft_vec_sub.o \
 		ft_int_arr.o ft_size_t_arr.o ft_strrev.o ft_strjoin2.o ft_delwhitesp.o ft_strfind.o \
-		ft_strnfind.o ft_indexof.o ft_strnsub.o ft_atoi_base.o ft_memjoin.o
+		ft_strnfind.o ft_indexof.o ft_strnsub.o ft_atoi_base.o ft_memjoin.o ft_print_bytes.o
 
 FLAG = -Wall -Wextra -Werror
 

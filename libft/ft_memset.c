@@ -6,7 +6,7 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/03 17:01:57 by vordynsk          #+#    #+#             */
-/*   Updated: 2017/11/03 18:39:39 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/07 15:41:37 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,10 @@ void	*ft_memset(void *b, int c, size_t len)
 	size_t	i;
 	char	*buf;
 
+	if (b == NULL)
+	{
+		return (b);
+	}
 	i = 0;
 	buf = b;
 	while (i < len)

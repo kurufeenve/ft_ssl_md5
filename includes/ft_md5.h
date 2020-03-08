@@ -6,7 +6,7 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/03/02 16:05:01 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/06 17:12:45 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/08 15:00:47 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,9 @@
 #define LEN_SIZE 8
 
 #define F(B, C, D) ((B & C) | (~B & D))
+#define G(B, C, D) ((B & D) | (C & ~D))
+#define H(B, C, D) (B ^ C ^ D)
+#define I(B, C, D) (C ^ (B | ~D))
 
 typedef struct	s_MD5_CTX
 {

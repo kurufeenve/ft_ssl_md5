@@ -6,12 +6,13 @@
 /*   By: vordynsk <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2020/02/15 16:24:07 by vordynsk          #+#    #+#             */
-/*   Updated: 2020/03/07 16:57:46 by vordynsk         ###   ########.fr       */
+/*   Updated: 2020/03/08 13:55:21 by vordynsk         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_md5.h"
 
+#include <stdio.h>
 void	print_bytes(unsigned char *bytes, size_t len);
 unsigned char *ft_MD5(const unsigned char *d, unsigned long n,
 		unsigned char *md)

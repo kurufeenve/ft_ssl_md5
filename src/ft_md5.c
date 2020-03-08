@@ -34,7 +34,7 @@ unsigned char *ft_MD5(const unsigned char *d, unsigned long n,
 
 int				ft_MD5_Init(t_MD5_CTX *c)
 {
-	int	i;
+	unsigned int	i;
 
 	ft_bzero(c, sizeof(*c));
 	c->a = A;
@@ -42,7 +42,8 @@ int				ft_MD5_Init(t_MD5_CTX *c)
 	c->c = C;
 	c->d = D;
 	i = 0;
-	i = 0xFFFFFFFF 
+	i = floor(0xFFFFFFFF * fabs(sin(1 + 1)) + 1);
+	ft_print_bytes((unsigned char *)&i, 4);
 	/*while (i < 64)
 	{
 		c->K[i] = 

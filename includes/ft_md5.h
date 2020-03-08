@@ -13,6 +13,12 @@
 #ifndef FT_MD5_H
 #define FT_MD5_H
 
+/*
+ * have to use sin() because it is very accurate
+ * https://stackoverflow.com/questions/2284860/how-does-c-compute-sin-and-other-math-functions
+*/
+#include <math.h>
+
 #include "../libft/includes/libft.h"
 
 /*

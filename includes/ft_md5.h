@@ -39,6 +39,7 @@ typedef struct	s_MD5_CTX
 	unsigned int	b;
 	unsigned int	c;
 	unsigned int	d;
+	unsigned int	K[64];
 }				t_MD5_CTX;
 
 unsigned char	*ft_MD5(const unsigned char *d, unsigned long n,

@@ -28,6 +28,8 @@
 #define BLOCK_SIZE 64
 #define LEN_SIZE 8
 
+#define F(B, C, D) ((B & C) | (~B & D))
+
 typedef struct	s_MD5_CTX
 {
 	unsigned int	a;

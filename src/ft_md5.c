@@ -41,13 +41,13 @@ int				ft_MD5_Init(t_MD5_CTX *c)
 	c->b = B;
 	c->c = C;
 	c->d = D;
-	i = 0;
-	i = floor(0xFFFFFFFF * fabs(sin(1 + 1)) + 1);
-	ft_print_bytes((unsigned char *)&i, 4);
-	/*while (i < 64)
+	i = 0; 
+	while (i < 64)
 	{
-		c->K[i] = 
-	}*/
+		c->K[i] = floor(0xFFFFFFFF * fabs(sin(i + 1)) + 1);
+		i++;
+	}
+	printf("context size = %zu\n", sizeof(*c));
 	return (1);
 }
 
@@ -78,13 +78,6 @@ int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
 
 int				ft_MD5_Final(unsigned char *md, t_MD5_CTX *c)
 {
-	int		i;
-
-	i = 0;
-	while (i < 16)
-	{
-		ft_memcpy(&md[i], (unsigned char *)(&c[i]), 4);
-		i += 4;
-	}
+	ft_memcpy(md, (unsigned char *)c, 16);
 	return (1);
 }

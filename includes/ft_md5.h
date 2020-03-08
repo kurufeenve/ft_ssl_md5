@@ -39,7 +39,7 @@
 #define H(B, C, D) (B ^ C ^ D)
 #define I(B, C, D) (C ^ (B | ~D))
 
-typedef struct	s_MD5_CTX
+typedef struct	__attribute__((packed)) s_MD5_CTX
 {
 	unsigned int	a;
 	unsigned int	b;

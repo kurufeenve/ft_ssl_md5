@@ -47,7 +47,14 @@ int				ft_MD5_Init(t_MD5_CTX *c)
 		c->K[i] = floor(0xFFFFFFFF * fabs(sin(i + 1)) + 1);
 		i++;
 	}
-	printf("context size = %zu\n", sizeof(*c));
+	unsigned char	*s_c = (unsigned char *)c;
+	i = 0;
+	while (i < sizeof(*c))
+	{
+		ft_print_bytes(s_c, 4);
+		i += 4;
+		s_c += 4;
+	}
 	return (1);
 }
 

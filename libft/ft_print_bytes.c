@@ -12,21 +12,51 @@
 
 #include "includes/libft.h"
 
-void	ft_print_bytes(unsigned char *bytes, size_t len)
+static void	ft_print_address(void *ptr)
 {
-	size_t	i;
-	char	*buf;
+	unsigned char	address[8];
+	int				i;
+	char			*buf;
 
-	i = 0;
-	while (i < len)
+	ft_memcpy((void *)address, (void *)&ptr, 8);
+	i = 7;
+	while (i >= 0)
 	{
-		buf = ft_itoa_base((int)bytes[i], 16);
+		buf = ft_itoa_base((int)address[i], 16);
 		if (buf == NULL)
 			return ;
 		if (ft_strlen(buf) == 1)
 			ft_putchar('0');
 		ft_putstr(buf);
 		free(buf);
+		i--;
+	}
+}
+
+void	ft_print_bytes(void *data, size_t len)
+{
+	size_t			i;
+	char			*buf;
+	unsigned char	*bytes;
+
+	if (data == NULL)
+		return ;
+	bytes = (unsigned char *)data;
+	i = 0;
+	while (i < len)
+	{	
+		buf = ft_itoa_base((int)*bytes, 16);
+		if (buf == NULL)
+			return ;
+		ft_print_address(bytes);
+		if (ft_strlen(buf) == 1)
+			ft_putstr(": 0");
+		else
+			ft_putstr(": ");
+		ft_putstr(buf);
+		ft_putchar('\n');
+		free(buf);
+		bytes++;
 		i++;
 	}
 	ft_putchar('\n');

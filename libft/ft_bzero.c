@@ -24,5 +24,7 @@ void	ft_bzero(void *s, size_t n)
 	i = 0;
 	buf = (unsigned char *)s;
 	while (i < n)
+	{
 		buf[i++] = 0;
+	}
 }

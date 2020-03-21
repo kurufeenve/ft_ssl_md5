@@ -42,39 +42,18 @@ int				ft_MD5_Init(t_MD5_CTX *c)
 	c->c = C;
 	c->d = D;
 	ft_memcpy(c->s, s, sizeof(c->s));
-	//ft_print_bytes(c->s, sizeof(c->s));
 	i = 0; 
 	while (i < 64)
 	{
-		c->K[i] = floor(0xFFFFFFFF * fabs(sin(i + 1)) + 1);
+		c->K[i] = (unsigned int)(0x100000000 * fabs(sin(i + 1)));
 		i++;
 	}
-	/*unsigned char	*s_c = (unsigned char *)c;
-	i = 0;
-	printf("c->K[0] = %X\n", c->K[0]);
-	while (i < sizeof(*c))
-	{
-		printf("%08x\n", *((unsigned int *)s_c));
-		i += 4;
-		s_c += 4;
-	}*/
 	return (1);
-}
-
-static void		padding(unsigned char *block, const void *data, unsigned long len)
-{
-	unsigned long	pad_len;
-
-	ft_bzero((void *)block, BLOCK_SIZE);
-	pad_len = BLOCK_SIZE - LEN_SIZE - len;
-	ft_memcpy((void *)block, data, len);
-	block[len] = 0x80;
-	ft_memcpy((void *)(&block[len + pad_len - 1]), (void *)&len, sizeof(len));
 }
 
 int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
 {
-	unsigned int	block[BLOCK_SIZE]; // should be unsigned int? and size/4?
+	unsigned int	block[BLOCK_SIZE / 4];
 	unsigned int	F;
 	unsigned int	g;
 	size_t			i;
@@ -110,6 +89,10 @@ int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
 		c->b = c->b + LEFTROTATE(F, c->s[((int)(i / 16) * 4 + (i % 4))]);
 		i++;
 	}
+	c->a += A;
+	c->b += B;
+	c->c += C;
+	c->d += D;
 	return (1);
 }
 

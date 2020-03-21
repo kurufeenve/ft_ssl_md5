@@ -20,10 +20,7 @@
 #include <math.h>
 
 #include "../libft/includes/libft.h"
-
-/*
- * maybe endian is wrong?
-*/
+#include "msg_prep.h"
 
 #define A 0x67452301
 #define B 0xEFCDAB89
@@ -31,7 +28,7 @@
 #define D 0x10325476
 
 #define FT_MD5_DIGEST_LENGTH 16
-#define BLOCK_SIZE 16
+#define BLOCK_SIZE 64
 #define LEN_SIZE 8
 
 #define F(B, C, D) ((B & C) | (~B & D))

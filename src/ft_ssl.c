@@ -24,6 +24,7 @@ int		main(int argc, char **argv)
 	 * for testing
 	*/
 	unsigned char	hash[16];
+	unsigned char	hash2[32];
 	unsigned char	data[] = {0x34, 0x32};
 
 	argv = NULL;
@@ -34,17 +35,13 @@ int		main(int argc, char **argv)
 		ft_putstr(usage);
 		return (0);
 	}
-	/*while (i < argc)
-	{
-		ft_putstr(argv[i]);
-		ft_putchar('\n');
-		i++;
-	}*/
-	//cli();
+	//char	str[] = "";
 	ft_MD5(data, 2, hash);
 	printf("data = %s\n", data);
-	ft_putstr("hash = ");
+	//ft_putstr("should be:\nd41d8cd98f00b204e9800998ecf8427e\n");
+	ft_putstr("hash: ");
 	ft_print_bytes(hash, 16);
+	ft_sha256(data, 2, hash2);
 	system("leaks ft_ssl");
 	return (0);
 }

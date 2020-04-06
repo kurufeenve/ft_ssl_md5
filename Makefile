@@ -1,4 +1,4 @@
-SRC = ft_ssl.c ft_md5.c cli.c msg_prep.c ft_sha256.c
+SRC = ft_ssl.c ft_md5.c cli.c msg_prep.c ft_sha256.c sample_text.c
  
 INC = includes/cli.h includes/ft_md5.h includes/ft_ssl.h includes/msg_prep.h\
 	  includes/ft_sha256.h

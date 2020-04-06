@@ -28,7 +28,7 @@
 #define D 0x10325476
 
 #define FT_MD5_DIGEST_LENGTH 16
-#define BLOCK_SIZE 64
+#define MD5_BLOCK_SIZE 64
 #define LEN_SIZE 8
 
 #define F(B, C, D) ((B & C) | (~B & D))
@@ -36,14 +36,11 @@
 #define H(B, C, D) (B ^ C ^ D)
 #define I(B, C, D) (C ^ (B | ~D))
 
-#define LEFTROTATE(x, c) ((x << c) | (x >> (32 - c)))
-
-typedef struct	__attribute__((packed)) s_MD5_CTX
+typedef struct	 s_MD5_CTX
 {
-	unsigned int	a;
-	unsigned int	b;
-	unsigned int	c;
-	unsigned int	d;
+	unsigned long	offset;
+	unsigned char	block_size;
+	unsigned int	h[4];
 	unsigned int	s[16];
 	unsigned int	K[64];
 }				t_MD5_CTX;

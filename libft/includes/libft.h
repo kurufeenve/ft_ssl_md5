@@ -19,6 +19,9 @@
 # include <math.h>
 # include "get_next_line.h"
 
+#define RoR(x, n) ((x >> n) | (x << (-n & 31)))
+#define RoL(x, n) ((x << n) | (x >> (-n & 31)))
+
 typedef struct		s_list
 {
 	void			*content;
@@ -126,5 +129,6 @@ void				ft_memjoin(void **dst, void *src, size_t dst_len,
 void				ft_xxd(void *bytes, size_t len);
 void				ft_print_bytes(void *data, size_t len);
 void				ft_get_address(void *address, void *ptr);
+void				ft_endian_swap(void *data, int size);
 
 #endif

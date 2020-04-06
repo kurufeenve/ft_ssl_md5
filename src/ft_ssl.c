@@ -36,12 +36,25 @@ int		main(int argc, char **argv)
 		return (0);
 	}
 	//char	str[] = "";
-	ft_MD5(data, 2, hash);
-	printf("data = %s\n", data);
-	//ft_putstr("should be:\nd41d8cd98f00b204e9800998ecf8427e\n");
-	ft_putstr("hash: ");
+	//ft_MD5(data, 2, hash);
+	/*for (int i = 0; i < 3960; i += 64)
+	{
+		if (i + 64 < 3960)
+		{
+			ft_print_bytes((void *)&g_sample_text[i], 64);
+		}
+		else
+		{
+			ft_print_bytes((void *)&g_sample_text[i], 3960 - i);
+		}
+	}*/
+	ft_MD5((unsigned char *)g_sample_text, ft_strlen(g_sample_text), hash);
+	//printf("data = %s\n", data);
+	ft_putstr("md5 hash: ");
 	ft_print_bytes(hash, 16);
 	ft_sha256(data, 2, hash2);
+	ft_putstr("sha256 hash: ");
+	ft_print_bytes(hash2, 32);
 	system("leaks ft_ssl");
 	return (0);
 }

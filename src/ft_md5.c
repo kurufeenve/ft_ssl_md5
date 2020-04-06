@@ -37,10 +37,11 @@ int				ft_MD5_Init(t_MD5_CTX *c)
 	unsigned int	s[] = {7, 12, 17, 22, 5,  9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21};
 
 	ft_bzero(c, sizeof(*c));
-	c->a = A;
-	c->b = B;
-	c->c = C;
-	c->d = D;
+	c->block_size = MD5_BLOCK_SIZE;
+	c->h[0] = A;
+	c->h[1] = B;
+	c->h[2] = C;
+	c->h[3] = D;
 	ft_memcpy(c->s, s, sizeof(c->s));
 	i = 0; 
 	while (i < 64)
@@ -53,51 +54,69 @@ int				ft_MD5_Init(t_MD5_CTX *c)
 
 int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
 {
-	unsigned int	block[BLOCK_SIZE / 4];
+	unsigned int	block[MD5_BLOCK_SIZE / 4];
 	unsigned int	F;
 	unsigned int	g;
 	size_t			i;
+	unsigned int	j;
+	unsigned int	num_of_blocks;
 
-	padding((unsigned char *)block, data, len);
-	i = 0;
-	while (i < 64)
+	num_of_blocks = len * 8 / 512;
+	if (len * 8 % 512 > 0)
 	{
-		if (i < 16)
-		{
-			F = F(c->b, c->c, c->d);
-			g = i;
-		}
-		else if (i > 15 && i < 32)
-		{
-			F = G(c->b, c->c, c->d);
-			g = (5 * i + 1) % 16;
-		}
-		else if (i > 31 && i < 48)
-		{
-			F = H(c->b, c->c, c->d);
-			g = (3 * i + 5) % 16;
-		}
-		else if (i > 47 && i < 64)
-		{
-			F = I(c->b, c->c, c->d);
-			g = (7 * i) % 16;
-		}
-		F = F + c->a + c->K[i] + block[g];
-		c->a = c->d;
-		c->d = c->c;
-		c->c = c->b;
-		c->b = c->b + LEFTROTATE(F, c->s[((int)(i / 16) * 4 + (i % 4))]);
-		i++;
+		num_of_blocks++;
 	}
-	c->a += A;
-	c->b += B;
-	c->c += C;
-	c->d += D;
+	if (len * 8 % 512 >= 448)
+	{
+		num_of_blocks++;
+	}
+	j = 0;
+	while (j < num_of_blocks)
+	{
+		data_split((unsigned char *)block, data, len, (void *)c);
+		ft_print_bytes((void *)block, 64);
+		//printf("%s\n", (char *)block);
+		i = 0;
+		while (i < 64)
+		{
+			if (i < 16)
+			{
+				F = F(c->h[1], c->h[2], c->h[3]);
+				g = i;
+			}
+			else if (i > 15 && i < 32)
+			{
+				F = G(c->h[1], c->h[2], c->h[3]);
+				g = (5 * i + 1) % 16;
+			}
+			else if (i > 31 && i < 48)
+			{
+				F = H(c->h[1], c->h[2], c->h[3]);
+				g = (3 * i + 5) % 16;
+			}
+			else if (i > 47 && i < 64)
+			{
+				F = I(c->h[1], c->h[2], c->h[3]);
+				g = (7 * i) % 16;
+			}
+			F = F + c->h[0] + c->K[i] + block[g];
+			c->h[0] = c->h[3];
+			c->h[3] = c->h[2];
+			c->h[2] = c->h[1];
+			c->h[1] = c->h[1] + RoL(F, c->s[((int)(i / 16) * 4 + (i % 4))]);
+			i++;
+		}
+		j++;
+	}
+	c->h[0] += A;
+	c->h[1] += B;
+	c->h[2] += C;
+	c->h[3] += D;
 	return (1);
 }
 
 int				ft_MD5_Final(unsigned char *md, t_MD5_CTX *c)
 {
-	ft_memcpy(md, (unsigned char *)c, 16);
+	ft_memcpy(md, (unsigned char *)c->h, 16);
 	return (1);
 }

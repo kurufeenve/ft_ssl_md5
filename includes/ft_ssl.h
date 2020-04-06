@@ -18,4 +18,6 @@
 #include "ft_sha256.h"
 #include "../libft/includes/libft.h"
 
+extern char	g_sample_text[]; 
+
 #endif

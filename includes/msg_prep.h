@@ -13,7 +13,7 @@ typedef struct		s_padding
 	unsigned long	offset;
 }					t_padding;
 
-void	padding(unsigned char *block, const void *data, unsigned long len);
+void	padding(unsigned char *block, const void *data, unsigned long len, t_padding *p);
 void	data_split(unsigned char *block, const void *data, unsigned long len, 
 		void *context);
 

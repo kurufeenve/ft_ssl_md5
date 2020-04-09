@@ -29,7 +29,7 @@
 
 #define FT_MD5_DIGEST_LENGTH 16
 #define MD5_BLOCK_SIZE 64
-#define LEN_SIZE 8
+//#define LEN_SIZE 8
 
 #define F(B, C, D) ((B & C) | (~B & D))
 #define G(B, C, D) ((B & D) | (C & ~D))
@@ -41,6 +41,7 @@ typedef struct	 s_MD5_CTX
 	unsigned long	offset;
 	unsigned char	block_size;
 	unsigned int	h[4];
+	unsigned int	b[4];
 	unsigned int	s[16];
 	unsigned int	K[64];
 }				t_MD5_CTX;

@@ -73,9 +73,9 @@ int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
 	j = 0;
 	while (j < num_of_blocks)
 	{
+		ft_memcpy((void *)c->b, (void *)c->h, 16);
 		data_split((unsigned char *)block, data, len, (void *)c);
 		ft_print_bytes((void *)block, 64);
-		//printf("%s\n", (char *)block);
 		i = 0;
 		while (i < 64)
 		{
@@ -106,12 +106,16 @@ int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
 			c->h[1] = c->h[1] + RoL(F, c->s[((int)(i / 16) * 4 + (i % 4))]);
 			i++;
 		}
+		c->h[0] += c->b[0];
+		c->h[1] += c->b[1];
+		c->h[2] += c->b[2];
+		c->h[3] += c->b[3];
 		j++;
 	}
-	c->h[0] += A;
+	/*c->h[0] += A;
 	c->h[1] += B;
 	c->h[2] += C;
-	c->h[3] += D;
+	c->h[3] += D;*/
 	return (1);
 }
 

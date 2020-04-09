@@ -15,10 +15,7 @@
 #include <stdio.h>
 int		main(int argc, char **argv)
 {
-	//char	buf[512];
 	char	usage[] = "usage: ft_ssl command [command opts] [command args]\n";
-	//char	*cli_data;
-	//char	*cli_buf;
 	int		i;
 	/*
 	 * for testing
@@ -35,21 +32,7 @@ int		main(int argc, char **argv)
 		ft_putstr(usage);
 		return (0);
 	}
-	//char	str[] = "";
-	//ft_MD5(data, 2, hash);
-	/*for (int i = 0; i < 3960; i += 64)
-	{
-		if (i + 64 < 3960)
-		{
-			ft_print_bytes((void *)&g_sample_text[i], 64);
-		}
-		else
-		{
-			ft_print_bytes((void *)&g_sample_text[i], 3960 - i);
-		}
-	}*/
-	ft_MD5((unsigned char *)g_sample_text, ft_strlen(g_sample_text), hash);
-	//printf("data = %s\n", data);
+	ft_MD5(/*(unsigned char *)g_sample_text*/data, 2/*ft_strlen(g_sample_text)*/, hash);
 	ft_putstr("md5 hash: ");
 	ft_print_bytes(hash, 16);
 	ft_sha256(data, 2, hash2);

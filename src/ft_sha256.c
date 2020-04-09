@@ -1,5 +1,5 @@
 #include "../includes/ft_sha256.h"
-
+#include <stdio.h>
 unsigned char *ft_sha256(const unsigned char *d, unsigned long n,
 		unsigned char *hash)
 {
@@ -19,6 +19,7 @@ unsigned char *ft_sha256(const unsigned char *d, unsigned long n,
 
 void			init_hash(t_SHA256_CTX *c)
 {
+	c->block_size = SHA256_BLOCK_SIZE;
 	c->H[0] += H0;
 	c->H[1] += H1;
 	c->H[2] += H2;
@@ -59,7 +60,8 @@ int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
 	int				i;
 
 	block[0] = SHA256_BLOCK_SIZE;
-	padding(block, data, len);
+	data_split(block, data, len, (void *)c);
+	ft_print_bytes((void *)block, SHA256_BLOCK_SIZE);
 	ft_memcpy(c->w, block, 64);
 	ft_endian_swap((void *)&c->w[14], 8);
 	i = 0;
@@ -75,6 +77,7 @@ int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
 		c->w[i] = c->w[i - 16] + c->s0 + c->w[i - 7] + c->s1;
 		i++;
 	}
+	ft_memcpy((void *)c->b, (void *)c->H, 32);
 	i = 0;
 	while (i < SHA256_BLOCK_SIZE)
 	{
@@ -94,7 +97,12 @@ int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
 		c->H[0] = c->tmp1 + c->tmp2;
 		i++;
 	}
-	init_hash(c);
+	i = 0;
+	while (i < 8)
+	{
+		c->H[i] += c->b[i];
+		i++;
+	}
 	return (1);
 }
 

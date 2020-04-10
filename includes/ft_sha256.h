@@ -27,6 +27,8 @@ typedef struct		s_SHA256_CTX
 	unsigned char	block_size;
 	unsigned int	H[8];
 	unsigned int	b[8];
+	unsigned int	num_of_blocks;
+	unsigned char	block[SHA256_BLOCK_SIZE];
 	unsigned int	K[SHA256_BLOCK_SIZE];
 	unsigned int	w[SHA256_BLOCK_SIZE];
 	unsigned int	s0;

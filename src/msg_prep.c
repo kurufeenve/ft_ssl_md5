@@ -27,7 +27,7 @@ void	data_split(unsigned char *block, const void *data, unsigned long len,
 	p.block_size = ((unsigned char *)context)[8];
 	p.msg_len_bits = len * 8;
 	ft_bzero((void *)block, p.block_size);
-	printf("p.block_size = %u, p.offset = %lu, len = %lu\n", p.block_size, p.offset, len);
+	//printf("p.block_size = %u, p.offset = %lu, len = %lu\n", p.block_size, p.offset, len);
 	if ((p.block_size + p.offset) < len)
 	{
 		ft_memcpy((void *)block, &data[p.offset], p.block_size);

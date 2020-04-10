@@ -32,11 +32,19 @@ int		main(int argc, char **argv)
 		ft_putstr(usage);
 		return (0);
 	}
-	ft_MD5(/*(unsigned char *)g_sample_text*/data, 2/*ft_strlen(g_sample_text)*/, hash);
+
+	cli();
+
+	ft_MD5(data, 2, hash);
 	ft_putstr("md5 hash: ");
 	ft_print_bytes(hash, 16);
 	ft_sha256(data, 2, hash2);
-	ft_putstr("sha256 hash: ");
+	ft_putstr("SHA256 (\"");
+	ft_putstr((char *)data);
+	ft_putstr("\") = ");
+	ft_print_bytes(hash2, 32);
+	ft_sha256((unsigned char *)g_sample_text, ft_strlen(g_sample_text), hash2);
+	ft_putstr("SHA256 (g_sample_text) = ");
 	ft_print_bytes(hash2, 32);
 	system("leaks ft_ssl");
 	return (0);

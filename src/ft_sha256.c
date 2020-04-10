@@ -53,17 +53,14 @@ int				ft_SHA256_Init(t_SHA256_CTX *c)
 	return (1);
 }
 
-int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
-		unsigned long len)
+static void			pre_calc(t_SHA256_CTX *c, unsigned int current_block)
 {
-	unsigned char	block[SHA256_BLOCK_SIZE];
-	int				i;
+	int		i;
 
-	block[0] = SHA256_BLOCK_SIZE;
-	data_split(block, data, len, (void *)c);
-	ft_print_bytes((void *)block, SHA256_BLOCK_SIZE);
-	ft_memcpy(c->w, block, 64);
-	ft_endian_swap((void *)&c->w[14], 8);
+	ft_bzero((void *)c->w, sizeof(*c->w) * SHA256_BLOCK_SIZE);
+	ft_memcpy(c->w, c->block, 64);
+	if (c->num_of_blocks - current_block == 1)
+		ft_endian_swap((void *)&c->w[14], 8);
 	i = 0;
 	while (i < 16)
 	{
@@ -78,30 +75,57 @@ int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
 		i++;
 	}
 	ft_memcpy((void *)c->b, (void *)c->H, 32);
-	i = 0;
-	while (i < SHA256_BLOCK_SIZE)
+}
+
+static void			calc_block(t_SHA256_CTX *c)
+{
+		int		i;
+
+		i = 0;
+		while (i < SHA256_BLOCK_SIZE)
+		{
+			c->s1 = S_II(c->H[4], 6, 11, 25);
+			c->ch = CH(c->H[4], c->H[5], c->H[6]);
+			c->tmp1 = c->H[7] + c->s1 + c->ch + c->K[i] + c->w[i];
+			c->s0 = S_II(c->H[0], 2, 13, 22);
+			c->maj = MAJ(c->H[0], c->H[1], c->H[2]);
+			c->tmp2 = c->s0 + c->maj;
+			c->H[7] = c->H[6];
+			c->H[6] = c->H[5];
+			c->H[5] = c->H[4];
+			c->H[4] = c->H[3] + c->tmp1;
+			c->H[3] = c->H[2];
+			c->H[2] = c->H[1];
+			c->H[1] = c->H[0];
+			c->H[0] = c->tmp1 + c->tmp2;
+			i++;
+		}
+}
+
+int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
+		unsigned long len)
+{
+	int				i;
+	unsigned int	j;
+
+	c->num_of_blocks = len * 8 / 512;
+	if (len * 8 % 512 > 0)
+		c->num_of_blocks++;
+	if (len * 8 % 512 >= 448)
+		c->num_of_blocks++;
+	j = 0;
+	while (j < c->num_of_blocks)
 	{
-		c->s1 = S_II(c->H[4], 6, 11, 25);
-		c->ch = CH(c->H[4], c->H[5], c->H[6]);
-		c->tmp1 = c->H[7] + c->s1 + c->ch + c->K[i] + c->w[i];
-		c->s0 = S_II(c->H[0], 2, 13, 22);
-		c->maj = MAJ(c->H[0], c->H[1], c->H[2]);
-		c->tmp2 = c->s0 + c->maj;
-		c->H[7] = c->H[6];
-		c->H[6] = c->H[5];
-		c->H[5] = c->H[4];
-		c->H[4] = c->H[3] + c->tmp1;
-		c->H[3] = c->H[2];
-		c->H[2] = c->H[1];
-		c->H[1] = c->H[0];
-		c->H[0] = c->tmp1 + c->tmp2;
-		i++;
-	}
-	i = 0;
-	while (i < 8)
-	{
-		c->H[i] += c->b[i];
-		i++;
+		data_split(c->block, data, len, (void *)c);
+		pre_calc(c, j);
+		calc_block(c);
+		i = 0;
+		while (i < 8)
+		{
+			c->H[i] += c->b[i];
+			i++;
+		}
+		j++;
 	}
 	return (1);
 }

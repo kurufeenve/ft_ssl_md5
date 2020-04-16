@@ -30,10 +30,12 @@ void			init_hash(t_SHA256_CTX *c)
 	c->H[7] += H7;
 }
 
-int				ft_SHA256_Init(t_SHA256_CTX *c)
+int				ft_SHA256_Init(void *ctx)
 {
 	unsigned int	*tmp;
+	t_SHA256_CTX	*c;
 
+	c = (t_SHA256_CTX *)ctx;
 	ft_bzero(c, sizeof(*c));
 	init_hash(c);
 	tmp = (unsigned int []){
@@ -102,12 +104,14 @@ static void			calc_block(t_SHA256_CTX *c)
 		}
 }
 
-int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
+int				ft_SHA256_Update(void *ctx, const void *data,
 		unsigned long len)
 {
 	int				i;
 	unsigned int	j;
+	t_SHA256_CTX	*c;
 
+	c = (t_SHA256_CTX *)ctx;
 	c->num_of_blocks = len * 8 / 512;
 	if (len * 8 % 512 > 0)
 		c->num_of_blocks++;
@@ -130,10 +134,12 @@ int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
 	return (1);
 }
 
-int				ft_SHA256_Final(unsigned char *hash, t_SHA256_CTX *c)
+int				ft_SHA256_Final(unsigned char *hash, void *ctx)
 {
 	int		i;
+	t_SHA256_CTX	*c;
 
+	c = (t_SHA256_CTX *)ctx;
 	i = 0;
 	while (i < 8)
 	{

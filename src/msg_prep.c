@@ -3,17 +3,12 @@
 void	padding(unsigned char *block, const void *data, unsigned long len, t_padding *p)
 {
 	unsigned long	pad_len;
-	//unsigned long	msg_len_bits;
-	//unsigned char	block_size;
 
 	if (block == NULL || data == NULL)
 		return ;
-	//block_size = block[0];
-	//ft_bzero((void *)block, block_size);
 	pad_len = p->block_size - sizeof(p->msg_len_bits) - len;
 	ft_memcpy((void *)block, data, len);
 	block[len] = 0x80;
-	//msg_len_bits = len * 8;
 	ft_memcpy((void *)&block[p->block_size - sizeof(p->msg_len_bits)],
 			(void *)&p->msg_len_bits, sizeof(p->msg_len_bits));
 }
@@ -27,7 +22,6 @@ void	data_split(unsigned char *block, const void *data, unsigned long len,
 	p.block_size = ((unsigned char *)context)[8];
 	p.msg_len_bits = len * 8;
 	ft_bzero((void *)block, p.block_size);
-	//printf("p.block_size = %u, p.offset = %lu, len = %lu\n", p.block_size, p.offset, len);
 	if ((p.block_size + p.offset) < len)
 	{
 		ft_memcpy((void *)block, &data[p.offset], p.block_size);

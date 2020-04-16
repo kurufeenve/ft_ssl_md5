@@ -31,11 +31,13 @@ unsigned char *ft_MD5(const unsigned char *d, unsigned long n,
 	return (md);
 }
 
-int				ft_MD5_Init(t_MD5_CTX *c)
+int				ft_MD5_Init(void *ctx)
 {
 	unsigned int	i;
 	unsigned int	s[] = {7, 12, 17, 22, 5,  9, 14, 20, 4, 11, 16, 23, 6, 10, 15, 21};
+	t_MD5_CTX		*c;
 
+	c = (t_MD5_CTX *)ctx;
 	ft_bzero(c, sizeof(*c));
 	c->block_size = MD5_BLOCK_SIZE;
 	c->h[0] = A;
@@ -52,7 +54,7 @@ int				ft_MD5_Init(t_MD5_CTX *c)
 	return (1);
 }
 
-int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
+int				ft_MD5_Update(void *ctx, const void *data, unsigned long len)
 {
 	unsigned int	block[MD5_BLOCK_SIZE / 4];
 	unsigned int	F;
@@ -60,6 +62,9 @@ int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
 	size_t			i;
 	unsigned int	j;
 	unsigned int	num_of_blocks;
+	t_MD5_CTX		*c;
+
+	c = (t_MD5_CTX *)ctx;
 
 	num_of_blocks = len * 8 / 512;
 	if (len * 8 % 512 > 0)
@@ -119,8 +124,11 @@ int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len)
 	return (1);
 }
 
-int				ft_MD5_Final(unsigned char *md, t_MD5_CTX *c)
+int				ft_MD5_Final(unsigned char *md, void *ctx)
 {
+	t_MD5_CTX		*c;
+
+	c = (t_MD5_CTX *)ctx;
 	ft_memcpy(md, (unsigned char *)c->h, 16);
 	return (1);
 }

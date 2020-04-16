@@ -48,8 +48,8 @@ typedef struct	 s_MD5_CTX
 
 unsigned char	*ft_MD5(const unsigned char *d, unsigned long n,
 		unsigned char *md);
-int				ft_MD5_Init(t_MD5_CTX *c);
-int				ft_MD5_Update(t_MD5_CTX *c, const void *data, unsigned long len);
-int				ft_MD5_Final(unsigned char *md, t_MD5_CTX *c);
+int				ft_MD5_Init(void *ctx);
+int				ft_MD5_Update(void *ctx, const void *data, unsigned long len);
+int				ft_MD5_Final(unsigned char *md, void *ctx);
 
 #endif

@@ -12,11 +12,22 @@
 
 #include "../includes/ft_ssl.h"
 
+void	init(t_ssl *ssl)
+{
+	ssl->init[MD5] = ft_MD5_Init;
+	ssl->init[SHA256] = ft_SHA256_Init;
+	ssl->update[MD5] = ft_MD5_Update;
+	ssl->update[SHA256] = ft_SHA256_Update;
+	ssl->final[MD5] = ft_MD5_Final;
+	ssl->final[SHA256] = ft_SHA256_Final;
+}
 #include <stdio.h>
 int		main(int argc, char **argv)
 {
-	char	usage[] = "usage: ft_ssl command [command opts] [command args]\n";
-	int		i;
+	char			usage[] = "usage: ft_ssl command [command opts] [command args]\n";
+	t_ssl			ssl;
+	t_MD5_CTX		m;
+	t_SHA256_CTX	s;
 	/*
 	 * for testing
 	*/
@@ -24,16 +35,21 @@ int		main(int argc, char **argv)
 	unsigned char	hash2[32];
 	unsigned char	data[] = {0x34, 0x32};
 
-	argv = NULL;
-
-	i = 1;
 	if (argc == 1)
 	{
 		ft_putstr(usage);
 		return (0);
 	}
-
-	cli();
+	ft_bzero((void *)&ssl, sizeof(ssl));
+	ssl.ac = argc;
+	ssl.av = argv;
+	init(&ssl);
+	ssl.context[MD5] = (void *)&m;
+	ssl.context[SHA256] = (void *)&s;
+	router(&ssl);
+	ft_print_bytes((void *)ssl.flags, 4);
+	output(&ssl);
+	//cli();
 
 	ft_MD5(data, 2, hash);
 	ft_putstr("md5 hash: ");

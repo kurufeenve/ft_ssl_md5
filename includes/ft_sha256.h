@@ -41,9 +41,9 @@ typedef struct		s_SHA256_CTX
 
 unsigned char *ft_sha256(const unsigned char *d, unsigned long n,
 		unsigned char *hash);
-int				ft_SHA256_Init(t_SHA256_CTX *c);
-int				ft_SHA256_Update(t_SHA256_CTX *c, const void *data,
+int				ft_SHA256_Init(void *ctx);
+int				ft_SHA256_Update(void *ctx, const void *data,
 		unsigned long len);
-int				ft_SHA256_Final(unsigned char *hash, t_SHA256_CTX *c);
+int				ft_SHA256_Final(unsigned char *hash, void *ctx);
 
 #endif

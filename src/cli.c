@@ -13,25 +13,27 @@
 #include "../includes/cli.h"
 #include <stdio.h>
 
-void	cli(void)
+void	cli(t_ssl *ssl)
 {
-	char	buf[512];
-	int		n;
-	char	*cl_input;
-	int		cl_input_len;
-	
-	n = 1;
-	cl_input_len = 0;
-	cl_input = NULL;
-	while(n)
-	{
-		ft_putchar('>');
-		n = read(0, buf, 512);
-		ft_memjoin((void **)&cl_input, (void *)buf, cl_input_len, n);
-		cl_input_len += n;
-	}
-	ft_memjoin((void **)&cl_input, (void *)"\0", cl_input_len, 1);
-	printf("cl_input = %s\n", cl_input);
-	free(cl_input);
-}
+	int				n;
+	size_t			data_len;
+	unsigned char	buf[65];
+	unsigned char	*data;
 
+	n = 1;
+	data = NULL;
+	data_len = 0;
+	ft_bzero(buf, 65);
+	while((n = read(0, buf, 64)) > 0)
+	{
+		if (ssl->flags[P] == 1)
+			ft_putstr((const char *)buf);
+		data = ft_memjoin(data, buf, data_len, n);
+		data_len += n;
+		ft_bzero(buf, 65);
+	}
+	ssl->init[ssl->command](ssl->context[ssl->command]);
+	ssl->update[ssl->command](ssl->context[ssl->command], (const void *)data, data_len);
+	ssl->final[ssl->command](ssl->hash, ssl->context[ssl->command]);
+	free(data);
+}

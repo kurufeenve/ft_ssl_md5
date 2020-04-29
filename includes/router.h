@@ -3,6 +3,7 @@
 
 #include "../libft/includes/libft.h"
 #include "ft_ssl_data_types.h"
+#include "cli.h"
 
 void	router(t_ssl *ssl);
 

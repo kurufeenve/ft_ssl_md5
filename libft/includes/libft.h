@@ -124,7 +124,7 @@ int					ft_indexof(char const *h, char const *n, size_t start,
 	int f);
 char				*ft_strnsub(char const *s, size_t start, size_t end);
 int					ft_atoi_base(char const *str, int base);
-void				ft_memjoin(void **dst, void *src, size_t dst_len,
+void				*ft_memjoin(void *dst, void *src, size_t dst_len,
 		size_t src_len);
 void				ft_xxd(void *bytes, size_t len);
 void				ft_print_bytes(void *data, size_t len);

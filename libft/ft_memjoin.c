@@ -12,27 +12,26 @@
 
 #include "includes/libft.h"
 
-void	ft_memjoin(void **dst, void *src, size_t dst_len, size_t src_len)
+void	*ft_memjoin(void *dst, void *src, size_t dst_len, size_t src_len)
 {
-	char	*buf;
+	unsigned char	*buf;
 
-	if (dst == NULL || src == NULL || src_len == 0)
+	if (src == NULL || src_len == 0)
 	{
-		return ;
+		return dst;
 	}
-	if (*dst == NULL && dst_len == 0)
+	if (dst == NULL)
 	{
-		*dst = (void *)malloc(sizeof(char) * src_len);
-		ft_memcpy(*dst, src, src_len);
+		dst = (unsigned char *)malloc(sizeof(unsigned char) * src_len);
+		ft_memcpy((void *)dst, (void *)src, src_len);
+		return (dst);
 	}
 	else
 	{
-		buf = (char *)malloc(sizeof(char) * dst_len);
-		ft_memcpy((void *)buf, *dst, dst_len);
-		free(*dst);
-		*dst = (void *)malloc(sizeof(char) * (dst_len + src_len));
-		ft_memcpy(*dst, (void *)buf, dst_len);
-		ft_memcpy((void *)&((*dst)[dst_len]), src, src_len);
-		free(buf);
+		buf = (unsigned char *)malloc(sizeof(unsigned char) * (dst_len + src_len));
+		ft_memcpy((void *)buf, dst, dst_len);
+		free(dst);
+		ft_memcpy((void *)&buf[dst_len], src, src_len);
+		return (buf);
 	}
 }

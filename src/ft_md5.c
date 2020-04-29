@@ -80,7 +80,6 @@ int				ft_MD5_Update(void *ctx, const void *data, unsigned long len)
 	{
 		ft_memcpy((void *)c->b, (void *)c->h, 16);
 		data_split((unsigned char *)block, data, len, (void *)c);
-		ft_print_bytes((void *)block, 64);
 		i = 0;
 		while (i < 64)
 		{
@@ -117,10 +116,6 @@ int				ft_MD5_Update(void *ctx, const void *data, unsigned long len)
 		c->h[3] += c->b[3];
 		j++;
 	}
-	/*c->h[0] += A;
-	c->h[1] += B;
-	c->h[2] += C;
-	c->h[3] += D;*/
 	return (1);
 }
 

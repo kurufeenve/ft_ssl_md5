@@ -29,9 +29,10 @@ typedef struct		s_ssl
 {
 	int				ac;
 	char			**av;
+	char			usage[53];
 	unsigned char	command;
 	unsigned char	flags[4];
-	unsigned char	data[64];
+	unsigned char	*data;
 	Init			init[2];
 	Update			update[2];
 	Final			final[2];

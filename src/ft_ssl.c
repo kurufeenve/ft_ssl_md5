@@ -14,6 +14,7 @@
 
 void	init(t_ssl *ssl)
 {
+	ft_memcpy((void *)ssl->usage, (void *)"usage: ft_ssl command [command opts] [command args]\n", 52);
 	ssl->init[MD5] = ft_MD5_Init;
 	ssl->init[SHA256] = ft_SHA256_Init;
 	ssl->update[MD5] = ft_MD5_Update;
@@ -24,44 +25,26 @@ void	init(t_ssl *ssl)
 #include <stdio.h>
 int		main(int argc, char **argv)
 {
-	char			usage[] = "usage: ft_ssl command [command opts] [command args]\n";
 	t_ssl			ssl;
 	t_MD5_CTX		m;
 	t_SHA256_CTX	s;
-	/*
-	 * for testing
-	*/
-	unsigned char	hash[16];
-	unsigned char	hash2[32];
-	unsigned char	data[] = {0x34, 0x32};
 
-	if (argc == 1)
-	{
-		ft_putstr(usage);
-		return (0);
-	}
 	ft_bzero((void *)&ssl, sizeof(ssl));
 	ssl.ac = argc;
 	ssl.av = argv;
 	init(&ssl);
+	if (ssl.ac == 1)
+	{
+		ft_putstr(ssl.usage);
+		system("leaks ft_ssl");
+		return (0);
+	}
 	ssl.context[MD5] = (void *)&m;
 	ssl.context[SHA256] = (void *)&s;
+	
 	router(&ssl);
-	ft_print_bytes((void *)ssl.flags, 4);
 	output(&ssl);
-	//cli();
 
-	ft_MD5(data, 2, hash);
-	ft_putstr("md5 hash: ");
-	ft_print_bytes(hash, 16);
-	ft_sha256(data, 2, hash2);
-	ft_putstr("SHA256 (\"");
-	ft_putstr((char *)data);
-	ft_putstr("\") = ");
-	ft_print_bytes(hash2, 32);
-	ft_sha256((unsigned char *)g_sample_text, ft_strlen(g_sample_text), hash2);
-	ft_putstr("SHA256 (g_sample_text) = ");
-	ft_print_bytes(hash2, 32);
 	system("leaks ft_ssl");
 	return (0);
 }

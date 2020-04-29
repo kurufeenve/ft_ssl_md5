@@ -16,7 +16,8 @@
 #include <stdlib.h>
 
 #include "../libft/includes/libft.h"
+#include "ft_ssl_data_types.h"
 
-void	cli(void);
+void	cli(t_ssl *ssl);
 
 #endif

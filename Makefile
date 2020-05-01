@@ -1,70 +1,69 @@
-SRC = ft_ssl.c \
-	  ft_md5.c \
-	  cli.c \
-	  msg_prep.c \
-	  ft_sha256.c \
-	  sample_text.c \
-	  router.c \
-	  output.c
+SRC 	=	  ft_ssl.c		\
+			  ft_md5.c		\
+			  cli.c			\
+			  msg_prep.c	\
+			  ft_sha256.c	\
+			  sample_text.c	\
+			  router.c		\
+			  output.c
  
-INC = includes/cli.h \
-	  includes/ft_md5.h \
-	  includes/ft_ssl.h \
-	  includes/msg_prep.h \
-	  includes/ft_sha256.h \
-	  includes/router.h \
-	  includes/ft_ssl_data_types.h \
-	  includes/output.h
+INC		=	  includes/cli.h				\
+			  includes/ft_md5.h				\
+			  includes/ft_ssl.h				\
+			  includes/msg_prep.h			\
+			  includes/ft_sha256.h			\
+			  includes/router.h				\
+			  includes/ft_ssl_data_types.h	\
+			  includes/output.h
 
-SRC_DIR = ./src/
-OBJ_DIR = ./obj/
-OBJ = $(addprefix $(OBJ_DIR),$(SRC:.c=.o))
-NAME = ft_ssl
-CFLAG = -Werror -Wextra -Wall
-LIB = -L./libft/ -lft
-CC = gcc
-REMAKE = rmk
+SRC_DIR	=	  ./src/
+OBJ_DIR	=	  ./obj/
+INC_DIR	=	  ./includes/
+NAME	=	  ft_ssl
+CFLAG	=	  -Werror -Wextra -Wall
+#INCL	=	  -Iincludes
+LIB		=	  -L./libft/ -lft libft/libft.a
+CC		=	  gcc
+
+SRCS	=	  $(addprefix $(SRC_DIR),$(SRC))
+OBJ		=	  $(SRC:.c=.o)
+OBJS	=	  $(addprefix $(OBJ_DIR),$(OBJ))
 
 #colours
-NONE = \033[0m
-RED = \033[31m
-GREEN = \033[32m
-YELLOW = \033[33m
-#BLUE = \033[34m
-#MAGENTA = \033[35m
-#CYAN = \033[36m
+NONE	=	  \033[0m
+RED		=	  \033[31m
+GREEN	=	  \033[32m
+YELLOW	=	  \033[33m
+BLUE	=	  \033[34m
+MAGENTA	=	  \033[35m
+CYAN	=	  \033[36m
 #colours
 
-$(OBJ_DIR)%.o: %.c $(INC)
-		@echo "\033[0;32mCreating object files\$(NONE) \033[31m$@\$(NONE)"
-		@$(CC) $(CFLAG) -c $< -o $@
+.PHONY: all clean fclean re Lib objectdir
 
-all: LIBFT $(NAME)
+all: objectdir Lib $(NAME)
 
-LIBFT:
-		@make -C ./libft/;
-		@echo "\n$(GREEN)Libft: $(YELLOW)READY$(NONE)";
+Lib:
+		@make -C ./libft/
+		@printf "\nLibft: $(GREEN)READY$(NONE)\n\n"
 
-$(NAME): $(OBJ)
-		@echo "\033[0;32mCompile solution ...$(NONE)"
-		@$(CC) $(CFLAG) -o $(NAME) $(OBJ) $(LIB)
-		@echo "\033[0;32mProgram compiled : $(NONE)\033[31m$(NAME)$(NONE)"
+objectdir:
+		@mkdir $(OBJ_DIR) 2> /dev/null || true
 
-$(OBJ): $(OBJ_DIR)
+$(NAME): $(OBJS)
+		@printf "\n\nObject Files: $(GREEN)READY$(NONE)\n"
+		@printf "\nFT_SSL: "
+		@$(CC) $(CFLAGS) $(OBJS) -o $(NAME) -I $(INC_DIR) $(LIB)
+		@printf "$(GREEN)READY$(NONE)\n\n"
 
-$(OBJ_DIR):
-		@mkdir $(OBJ_DIR)
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
+		@$(CC) $(CFLAGS) -c $< -o $@ -I $(INC_DIR)
+		@printf "."
 
 clean:
-		@echo "\033[0;32mCleaning object files ...$(NONE)"
-		@rm -rf $(OBJ_DIR)
+		@rm -rf obj
 
 fclean: clean
-		@rm -f $(NAME)
-		@echo "\033[31m$(NAME)$(NONE)\033[0;32m was completely removed$(NONE)"
+		@rm -rf $(NAME)
 
-re: $(REMAKE) fclean all
-$(REMAKE):
-		@echo "\033[0;32mRemaking project $(NONE)\033[31m$(NAME)$(NONE)"
-
-vpath %.c $(SRC_DIR)
+re: fclean all

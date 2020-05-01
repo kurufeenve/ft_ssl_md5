@@ -32,6 +32,8 @@ OFILES = ft_atoi.o ft_bzero.o ft_isalnum.o ft_isalpha.o ft_isascii.o ft_isdigit.
 
 FLAG = -Wall -Wextra -Werror
 
+.PHONY: all clean fclean re
+
 all: $(NAME)
 
 $(NAME): $(OFILES)

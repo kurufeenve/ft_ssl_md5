@@ -20,7 +20,7 @@ void	cli(t_ssl *ssl)
 	unsigned char	buf[65];
 	unsigned char	*data;
 
-	n = 1;
+	//n = 1;
 	data = NULL;
 	data_len = 0;
 	ft_bzero(buf, 65);

@@ -52,7 +52,6 @@ tabnew
 tabnew
 tabnew
 tabnew
-tabnew
 tabrewind
 edit src/ft_md5.c
 set splitbelow splitright
@@ -2093,15 +2092,15 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 61 - ((0 * winheight(0) + 24) / 49)
+let s:l = 48 - ((47 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-61
-normal! 022|
+48
+normal! 09|
 wincmd w
 argglobal
-if bufexists("includes/router.h") | buffer includes/router.h | else | edit includes/router.h | endif
+if bufexists("src/cli.c") | buffer src/cli.c | else | edit src/cli.c | endif
 setlocal noautoindent
 setlocal backupcopy=
 setlocal nobinary
@@ -2132,8 +2131,8 @@ setlocal nodiff
 setlocal equalprg=
 setlocal errorformat=
 setlocal noexpandtab
-if &filetype != 'cpp'
-setlocal filetype=cpp
+if &filetype != 'c'
+setlocal filetype=c
 endif
 setlocal fixendofline
 setlocal foldcolumn=0
@@ -2198,8 +2197,8 @@ setlocal statusline=
 setlocal suffixesadd=
 setlocal swapfile
 setlocal synmaxcol=3000
-if &syntax != 'cpp'
-setlocal syntax=cpp
+if &syntax != 'c'
+setlocal syntax=c
 endif
 setlocal tabstop=4
 setlocal tagcase=
@@ -2218,13 +2217,14 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 6 - ((5 * winheight(0) + 24) / 49)
+let s:l = 23 - ((22 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-6
-normal! 0
+23
+normal! 06|
 wincmd w
+2wincmd w
 exe 'vert 1resize ' . ((&columns * 31 + 102) / 204)
 exe 'vert 2resize ' . ((&columns * 86 + 102) / 204)
 exe 'vert 3resize ' . ((&columns * 85 + 102) / 204)
@@ -2528,12 +2528,12 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 19 - ((18 * winheight(0) + 24) / 49)
+let s:l = 27 - ((26 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-19
-normal! 029|
+27
+normal! 037|
 wincmd w
 argglobal
 if bufexists("libft/ft_memjoin.c") | buffer libft/ft_memjoin.c | else | edit libft/ft_memjoin.c | endif
@@ -2663,139 +2663,6 @@ wincmd w
 exe 'vert 1resize ' . ((&columns * 31 + 102) / 204)
 exe 'vert 2resize ' . ((&columns * 86 + 102) / 204)
 exe 'vert 3resize ' . ((&columns * 85 + 102) / 204)
-tabnext
-edit libft/ft_strjoin.c
-set splitbelow splitright
-set nosplitbelow
-set nosplitright
-wincmd t
-set winminheight=0
-set winheight=1
-set winminwidth=0
-set winwidth=1
-argglobal
-setlocal noautoindent
-setlocal backupcopy=
-setlocal nobinary
-setlocal nobreakindent
-setlocal breakindentopt=
-setlocal bufhidden=
-setlocal buflisted
-setlocal buftype=
-setlocal cindent
-setlocal cinkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal cinoptions=
-setlocal cinwords=if,else,while,do,for,switch
-setlocal colorcolumn=
-setlocal comments=s1:/*,mb:*,ex:*/,://,b:#,:%,:XCOMM,n:>,fb:-
-setlocal commentstring=/*%s*/
-setlocal complete=.,w,b,u,t,i
-setlocal completefunc=
-setlocal nocopyindent
-setlocal cryptmethod=
-setlocal nocursorbind
-setlocal nocursorcolumn
-set cursorline
-setlocal cursorline
-setlocal cursorlineopt=both
-setlocal define=
-setlocal dictionary=
-setlocal nodiff
-setlocal equalprg=
-setlocal errorformat=
-setlocal noexpandtab
-if &filetype != 'c'
-setlocal filetype=c
-endif
-setlocal fixendofline
-setlocal foldcolumn=0
-setlocal foldenable
-setlocal foldexpr=0
-setlocal foldignore=#
-setlocal foldlevel=0
-setlocal foldmarker={{{,}}}
-setlocal foldmethod=manual
-setlocal foldminlines=1
-setlocal foldnestmax=20
-setlocal foldtext=foldtext()
-setlocal formatexpr=
-setlocal formatoptions=tcq
-setlocal formatlistpat=^\\s*\\d\\+[\\]:.)}\\t\ ]\\s*
-setlocal formatprg=
-setlocal grepprg=
-setlocal iminsert=0
-setlocal imsearch=-1
-setlocal include=
-setlocal includeexpr=
-setlocal indentexpr=
-setlocal indentkeys=0{,0},0),0],:,0#,!^F,o,O,e
-setlocal noinfercase
-setlocal iskeyword=@,48-57,_,192-255
-setlocal keywordprg=
-setlocal nolinebreak
-setlocal nolisp
-setlocal lispwords=
-setlocal nolist
-setlocal makeencoding=
-setlocal makeprg=
-setlocal matchpairs=(:),{:},[:]
-setlocal modeline
-setlocal modifiable
-setlocal nrformats=bin,octal,hex
-set number
-setlocal number
-setlocal numberwidth=4
-setlocal omnifunc=
-setlocal path=
-setlocal nopreserveindent
-setlocal nopreviewwindow
-setlocal quoteescape=\\
-setlocal noreadonly
-set relativenumber
-setlocal relativenumber
-setlocal noscrollbind
-setlocal scrolloff=-1
-setlocal shiftwidth=4
-setlocal noshortname
-setlocal showbreak=
-setlocal sidescrolloff=-1
-setlocal signcolumn=auto
-setlocal smartindent
-setlocal softtabstop=0
-setlocal nospell
-setlocal spellcapcheck=[.?!]\\_[\\])'\"\	\ ]\\+
-setlocal spellfile=
-setlocal spelllang=en
-setlocal statusline=
-setlocal suffixesadd=
-setlocal swapfile
-setlocal synmaxcol=3000
-if &syntax != 'c'
-setlocal syntax=c
-endif
-setlocal tabstop=4
-setlocal tagcase=
-setlocal tagfunc=
-setlocal tags=
-setlocal termwinkey=
-setlocal termwinscroll=10000
-setlocal termwinsize=
-setlocal textwidth=0
-setlocal thesaurus=
-setlocal noundofile
-setlocal undolevels=-123456
-setlocal wincolor=
-setlocal nowinfixheight
-setlocal nowinfixwidth
-setlocal wrap
-setlocal wrapmargin=0
-silent! normal! zE
-let s:l = 1 - ((0 * winheight(0) + 25) / 50)
-if s:l < 1 | let s:l = 1 | endif
-exe s:l
-normal! zt
-1
-normal! 0
 tabnext
 edit ~/Documents/programing/ft_ssl_test/Makefile
 set splitbelow splitright
@@ -3227,12 +3094,12 @@ setlocal nowinfixheight
 setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
-let s:l = 8 - ((7 * winheight(0) + 12) / 24)
+let s:l = 21 - ((20 * winheight(0) + 12) / 24)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
-8
-normal! 028|
+21
+normal! 012|
 wincmd w
 argglobal
 if bufexists("Makefile") | buffer Makefile | else | edit Makefile | endif
@@ -3352,14 +3219,13 @@ setlocal nowinfixwidth
 setlocal wrap
 setlocal wrapmargin=0
 silent! normal! zE
-let s:l = 60 - ((38 * winheight(0) + 24) / 49)
+let s:l = 60 - ((29 * winheight(0) + 24) / 49)
 if s:l < 1 | let s:l = 1 | endif
 exe s:l
 normal! zt
 60
 normal! 014|
 wincmd w
-4wincmd w
 exe 'vert 1resize ' . ((&columns * 31 + 102) / 204)
 exe '2resize ' . ((&lines * 24 + 26) / 52)
 exe 'vert 2resize ' . ((&columns * 85 + 102) / 204)
@@ -3801,7 +3667,7 @@ wincmd w
 exe 'vert 1resize ' . ((&columns * 31 + 102) / 204)
 exe 'vert 2resize ' . ((&columns * 86 + 102) / 204)
 exe 'vert 3resize ' . ((&columns * 85 + 102) / 204)
-tabnext 8
+tabnext 5
 set stal=1
 badd +61 src/ft_md5.c
 badd +1 src/ft_sha256.c
@@ -3817,7 +3683,7 @@ badd +31 includes/ft_md5.h
 badd +1 includes/ft_sha256.h
 badd +1 includes/msg_prep.h
 badd +1 src/ft_ssl.c
-badd +1 includes/router.h
+badd +12 includes/router.h
 badd +8 libft/ft_get_address.c
 badd +102 ~/Documents/programing/ft_ssl_test/srcs/hash/sha256/sha256.c
 badd +1 src/cli.c
@@ -3844,7 +3710,7 @@ badd +3 run_ft_ssl_test.sh
 badd +3 src/commands.c
 badd +4 includes/commands.h
 badd +1 libft/ft_memjoin.c
-badd +0 libft/ft_strjoin.c
+badd +2 libft/ft_strjoin.c
 badd +45 ~/Documents/programing/ft_ssl_test/Makefile
 badd +16 ../../../.vimrc
 if exists('s:wipebuf') && len(win_findbuf(s:wipebuf)) == 0
